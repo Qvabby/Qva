@@ -1,0 +1,51 @@
+﻿@using Qvastart___1.ViewModels;
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1 class="text-info ProgtiqvaFontBold">Register</h1>
+
+<form asp-controller="Account" asp-action="Register" method="post" role="form" class="form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group ProgtiqvaFont">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" type="text" class="form-control InputFont" name="Name">
+        <span asp-validation-for="Name" class="Text-danger InputFont RegisterValidationStyle"></span>
+    </div>
+    <div class="form-group ProgtiqvaFont">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" type="text" class="form-control InputFont" name="LastName">
+        <span asp-validation-for="LastName" class="Text-danger InputFont RegisterValidationStyle"></span>
+    </div>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" type="text" class="form-control InputFont" name="Username">
+        <span asp-validation-for="Username" class="Text-danger InputFont RegisterValidationStyle"></span>
+    <div class="form-group ProgtiqvaFont">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" class="form-control InputFont" name="Email">
+        <span asp-validation-for="Email" class="Text-danger InputFont RegisterValidationStyle"></span>
+    </div>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" type="tel" class="form-control InputFont" name="PhoneNumber">
+        <span asp-validation-for="PhoneNumber" class="Text-danger InputFont RegisterValidationStyle"></span>
+    <div class="form-group ProgtiqvaFont">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control InputFont" name="Password">
+        <span asp-validation-for="Password" class="Text-danger InputFont RegisterValidationStyle"></span>
+    </div>
+    <div class="form-group ProgtiqvaFont">
+        <label asp-for="ConfirmedPassword"></label>
+        <input asp-for="ConfirmedPassword" type="password" class="form-control InputFont" name="ConfirmedPassword">
+        <span asp-validation-for="ConfirmedPassword" class="Text-danger InputFont RegisterValidationStyle"></span>
+    </div>
+        <button type="submit" class="btn btn-primary mt-3 ProgtiqvaFontBold">Register</button>
+    
+</form>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

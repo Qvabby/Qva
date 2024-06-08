@@ -1,0 +1,20 @@
+﻿@model (bool, string);
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        @if (Model.Item1 == true)
+        {
+            <div class="alert alert-success alert-dismissible fade show mt-2">
+                <strong style="color:antiquewhite">Success!</strong> @Model.Item2
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-secondary alert-dismissible fade show mt-2">
+                <strong style="color:antiquewhite">Error!</strong> @Model.Item2
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+    </div>
+</div>

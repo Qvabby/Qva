@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Home";
+}
+<img class="p-3" id="LogoCenter" src="/media/Logo2.png">
+<div class="text-center text-info mt-4">
+    <h1 class="display-4" style="cursor:default;">Qvastore</h1>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @if (!User.IsInRole("Admin"))
+        {
+            <p style="font-family:NinoMtavruli; font-weight:normal; font-style:normal; cursor:default;"> მაღალი ხარისხი დაბალ ფასად სპეციალურად <strong>@UserManager.GetUserName(User).ToUpper()-</strong>სთვის<strong>!</strong></p>
+
+        }
+        else
+        {
+            <p style="font-family:NinoMtavruli; font-weight:normal; font-style:normal;cursor:default;"> გამარჯობა ადმინო <strong class="text-warning">@UserManager.GetUserName(User).ToUpper()</strong></p>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <a asp-controller="Administrator" asp-action="index" class="btn btn-warning p-4 text-capitalize text-md-center">Control Panel</a>
+                </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        <p style="font-family:NinoMtavruli; font-weight:normal; font-style:normal;cursor:default;"> მაღალი ხარისხი დაბალ ფასად.</p>
+    }
+
+
+
+</div>

@@ -1,0 +1,44 @@
+﻿@using Qvastart___1.ViewModels;
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+<h1 class="text-info ProgtiqvaFontBold">Login</h1>
+
+<form asp-controller="Account" asp-action="Login" asp-route-ReturnUrl="@ViewData["ReturnUrl"]" method="post" role="form" class="form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group ProgtiqvaFont">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" type="text" class="form-control InputFont" name="Username">
+        <span asp-validation-for="Username" class="Text-danger InputFont RegisterValidationStyle"></span>
+    </div>
+
+    <div class="form-group ProgtiqvaFont">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control InputFont" name="Password">
+        <span asp-validation-for="Password" class="Text-danger InputFont RegisterValidationStyle"></span>
+    </div>
+    <div class="form-group ProgtiqvaFont">
+        <label asp-for="RememberMe"></label>
+        <input asp-for="RememberMe" type="checkbox" class="form-check" name="RememberMe">
+        <span asp-validation-for="RememberMe" class="Text-danger InputFont RegisterValidationStyle"></span>
+    </div>
+        <div class="row">
+            <div class="col-md-8">
+                <button type="submit" class="btn btn-success mt-2 ProgtiqvaFontBold">Login</button>
+            </div>
+            <div class="col-md-4">
+                <a class="ProgtiqvaFont" asp-controller="Account" asp-action="ForgetPassword">Forgot Password</a>
+            </div>
+        </div>
+        
+    
+</form>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

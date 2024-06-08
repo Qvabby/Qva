@@ -1,0 +1,78 @@
+﻿@using Qvastart___1.ViewModels.Dtos
+@model List<GetProductDto>
+@{
+    ViewData["Title"] = "Store";
+}
+<h2 class="text-center text-capitalize">
+    Store
+</h2>
+
+<div class="container">
+    <div class="row">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var p = Model[i];
+            var carouselId = $"carousel-{i}"; // Unique ID using the index
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div id="@carouselId" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            @{
+                                int y = 0;
+                            }
+                            @foreach (var image in p.Images)
+                            {
+                                <button type="button" data-bs-target="#@carouselId" data-bs-slide-to="@y" class="@(y == 0 ? "active" : "")" aria-current="true" aria-label="Slide @y"></button>
+                                y++;
+                            }
+                        </div>
+                        <div class="carousel-inner">
+                            @{
+                                int x = 0;
+                            }
+                            @foreach (var image in p.Images)
+                            {
+                                <div class="carousel-item @(x == 0 ? "active" : "")">
+                                    <img class="d-block w-100 carousel-image" src="@image.ImagePath" alt="Slide @x">
+                                </div>
+                                x++;
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#@carouselId" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#@carouselId" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@p.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@p.Description</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        @Model[i].Price
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .carousel-image {
+        height: 300px; /* Set the height you want for the images */
+        object-fit: cover; /* Ensures the image covers the element without distortion */
+    }
+</style>

@@ -1,0 +1,96 @@
+html {
+    font-size: 14px;
+}
+
+@font-face {
+    font-family: "NinoMtavruli";
+    src: url(/media/NinoMtavruli.ttf);
+}
+
+@font-face {
+    font-family: "Progtiqva";
+    src: url(/media/ProgticeRegular.ttf);
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#LogoCenter {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    z-index: -1;
+    filter: brightness(35%);
+    transition: 2s;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+    #LogoCenter:hover {
+        transition: 2s;
+        transform: translate(-50%,-50%) scale(1.05) rotate(180deg);
+        filter: brightness(65%);
+    }
+
+.ProgtiqvaFontBold {
+    font-family: Progtiqva;
+    font-weight: bold;
+}
+
+.ProgtiqvaFontBolder {
+    font-family: Progtiqva;
+    font-weight: bolder;
+}
+
+.ProgtiqvaFont {
+    font-family: Progtiqva;
+}
+
+.InputFont {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* XP BAR */
+div#fillbar {
+    background-color: #5e2bb2;
+    height:15px;
+}
+/* ------- */
+.FontNumber{
+    font-family:NinoMtavruli;
+}
+
+/* Validation */
+
+.RegisterValidationStyle {
+    color: red;
+    font-size: small;
+    opacity: 0.75;
+    cursor: default;
+    transition: 0.3s;
+}
+.RegisterValidationStyle:hover{
+    opacity:0.95;
+    transition:0.3s;
+    font-size:medium;
+}

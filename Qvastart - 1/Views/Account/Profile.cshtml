@@ -1,0 +1,206 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Qvastart___1.ViewModels;
+@inject UserManager<IdentityUser> UserManager;
+@inject SignInManager<IdentityUser> SignInManager;
+@model ProfileViewModel
+@{
+    ViewData["Title"] = $"Profile - {UserManager.GetUserName(User)}";
+    int level = 0;
+    int NextLevelXP = 100;
+    decimal perc = Model.XP;
+
+    if (Model.XP >= 100 && Model.XP < 200)
+    {
+        level = 1;
+        NextLevelXP = 200;
+        perc = ((Model.XP - 100) / 100) * 100;
+    }
+    else if (Model.XP >= 200 && Model.XP < 300)
+    {
+        level = 2;
+        NextLevelXP = 300;
+        perc = ((Model.XP - 200) / 100) * 100;
+    }
+    else if (Model.XP >= 300 && Model.XP < 500)
+    {
+        level = 3;
+        NextLevelXP = 500;
+        perc = ((Model.XP - 300) / 200) * 100;
+    }
+    else if (Model.XP >= 500 && Model.XP < 1000)
+    {
+        level = 4;
+        NextLevelXP = 1000;
+        perc = ((Model.XP - 500) / 500) * 100;
+    }
+    else if (Model.XP >= 1000)
+    {
+        level = 5;
+        perc = 1000;
+    }
+    if (perc == 0) { perc += 0.1m; }
+    string xpstring = Model.XP.ToString("0.##");
+    string percinstring = perc.ToString("0.##");
+    if (percinstring.Contains(','))
+    {
+        percinstring = percinstring.Replace(',', '.');
+    }
+    if (xpstring.Contains(','))
+    {
+        xpstring = xpstring.Replace(',', '.');
+    }
+}
+<div class="container">
+    <div class="row mt-3">
+
+        <div class="col-12 ProgtiqvaFont text-center mt-2">
+            @if (User.IsInRole("Admin"))
+            {
+                <h4>Welcome back Admin <span class="text-warning">@Model.Username</span></h4>
+            }
+            else
+            {
+                <h4>Welcome To Your Profile <span class="text-danger">@Model.Username</span></h4>
+            }
+
+        </div>
+        @* TOP SIDE *@
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-pills">
+                        @* XP BAR *@
+                        <div id="bar">
+                            <div class="pbar">
+                                @if (Model.XP < 1000)
+                                {
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-animated progress-bar-striped" id="fillbar" style="max-width: 100%; width: @percinstring%"></div>
+                                    </div>
+                                }
+                                else if(Model.XP >= 1000)
+                                {
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-animated progress-bar-striped bg-warning" id="fillbar" style="max-width: 100%; width: @percinstring%"></div>
+                                    </div>
+                                }
+
+
+                                <div class="FontNumbe mt-1 p-1">
+                                    
+                                    @if (level < 5)
+                                    {
+                                        <h4 style="width:100%;" class="d-inline text-warning">
+                                            XP: @xpstring/@NextLevelXP
+                                        </h4>
+                                        <h4 class="text-end text-danger d-inline">Next Level: @(level + 1)</h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="text-end text-warning d-inline">MAX LEVEL</h4>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                @*<hr />*@
+                <div class="card-body">
+                    <div class="card-text">
+                        Total Items Bought: @Model.UserPurchasedProducts.Count
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-4" />
+        <div class="col-md-5 mt-2">
+            <!--Profile STUFF-->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-pills">
+                        <h4>Manage Your Profile.</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <p class="text-center text-danger text-xl-center ProgtiqvaFont" style="font-size:30px;">Info</p>
+                    </div>
+                    <div class="row justify-content-center text-center FontNumber">
+                        <div class="col-12">
+                            <div class="card-text">
+                                <span>Name</span> : <span>@Model.Name</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card-text">
+                                <span>Last Name</span> : <span>@Model.LastName</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card-text">
+                                <span>Username</span> : <span>@Model.Username</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card-text">
+                                <span>Email</span> : <span>@Model.Email</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card-text">
+                                <span>Number</span> : <span>@Model.PhoneNumber</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card-text">
+                                <span class="text-warning">XP</span> : <span class="text-warning">@xpstring</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <a class="btn btn-outline-danger">Edit</a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 mt-2">
+            @*Other Stuff*@
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-pills">
+                        <h4>Other</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-subtitle ProgtiqvaFont">
+                        <p style="font-size:30px;" class="text-danger">Your Wishlists:</p>
+                    </div>
+                    <div>
+                        @* Wishlisted Div*@
+                        <div class="card-text">
+                            @if (Model.UserWishlistedProducts.Count > 0)
+                            {
+                                @foreach (var product in Model.UserWishlistedProducts)
+                                {
+                                    <p>@product.product.Name - <a class="btn btn-success" asp-controller="" asp-action="" asp-route-id="@product.ProductId">Check</a></p>
+                                }
+                            }
+                            else
+                            {
+                                <p>You do not have any wishlisted product.</p>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
